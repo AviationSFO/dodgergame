@@ -1,4 +1,4 @@
-# Falling dodger Game in Python By Steven Weinstein on 11-8-2021
+# Falling dodger Game in Python By Steven Weinstein on 11-10-2021
 # importing required modules
 import turtle
 import os
@@ -6,7 +6,7 @@ import time
 import random
 TK_SILENCE_DEPRECATION=1
 fallers = 1
-delay = 0.05
+delay = 0.025
 score = 0
 highscoredoc = open(os.path.expanduser("~/Desktop/DodgerGame/highest_score_local.txt"), "r+")
 highscore = highscoredoc.read()
@@ -35,7 +35,7 @@ global ypos
 oriypos = 290
 ypos = 290
 faller.goto(xpos, ypos)
-fallspeed = 10
+fallspeed = 6
 
 # pen setup
 pen = turtle.Turtle()
@@ -61,14 +61,14 @@ def stop():
 def move():
     if head.direction == "right":
         x = head.xcor()
-        head.setx(x-15)
+        head.setx(x-9)
     if head.direction == "left":
         x = head.xcor()
-        head.setx(x+15)
+        head.setx(x+9)
 wn.listen()
 wn.onkeypress(goright, "Right")
 wn.onkeypress(goleft, "Left")
-# wn.onkeypress(stop, " ")
+wn.onkeypress(stop, " ")
 # main loop
 while True:
     wn.update()
@@ -92,7 +92,7 @@ while True:
         xpos = random.randint(-280, 280)
         ypos = 290
         faller.goto(xpos, ypos)
-        fallspeed += 0.5
+        fallspeed += 0.05
         
     if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
         head.goto(0, -280)
@@ -106,5 +106,4 @@ while True:
         pen.write("Score : {} High Score : {} ".format(
                 score, highscore), align="center", font=("helvetica", 20, "bold"))
     time.sleep(delay)
-    
 wn.mainloop()
