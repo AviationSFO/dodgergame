@@ -6,13 +6,13 @@ import time
 import random
 TK_SILENCE_DEPRECATION=1
 fallers = 1
-delay = 0.025
+delay = 0.0125
 score = 0
 highscoredoc = open(os.path.expanduser("~/Desktop/DodgerGame/highest_score_local.txt"), "r+")
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game Beta 0.1")
+wn.title("Dodger Game Beta 0.1r3")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -35,7 +35,7 @@ global ypos
 oriypos = 290
 ypos = 290
 faller.goto(xpos, ypos)
-fallspeed = 6
+fallspeed = 3
 
 # pen setup
 pen = turtle.Turtle()
@@ -61,10 +61,10 @@ def stop():
 def move():
     if head.direction == "right":
         x = head.xcor()
-        head.setx(x-9)
+        head.setx(x-5)
     if head.direction == "left":
         x = head.xcor()
-        head.setx(x+9)
+        head.setx(x+5)
 wn.listen()
 wn.onkeypress(goright, "Right")
 wn.onkeypress(goleft, "Left")

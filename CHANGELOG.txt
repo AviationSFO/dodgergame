@@ -1,2 +1,5 @@
 v0.1B
 First release!
+
+v0.1r2 and 3
+Added smoothness
