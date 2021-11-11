@@ -6,13 +6,13 @@ import time
 import random
 TK_SILENCE_DEPRECATION=1
 fallers = 1
-delay = 0.0125
+delay = 0.00625
 score = 0
 highscoredoc = open(os.path.expanduser("~/Desktop/DodgerGame/highest_score_local.txt"), "r+")
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game Beta 0.1r3")
+wn.title("Dodger Game Beta 0.1r4")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -32,10 +32,18 @@ faller.color("green")
 faller.penup()
 xpos = random.randint(-280, 280)
 global ypos
-oriypos = 290
 ypos = 290
 faller.goto(xpos, ypos)
-fallspeed = 3
+faller2 = turtle.Turtle()
+faller2.speed(0)
+faller2.shape("square")
+faller2.color("green")
+faller2.penup()
+xpos2 = random.randint(-280, 280)
+global ypos2
+ypos2 = 290
+faller2.goto(xpos2, ypos2)
+fallspeed = 1.5
 
 # pen setup
 pen = turtle.Turtle()
@@ -45,7 +53,7 @@ pen.shape("square")
 pen.color("white")
 pen.penup()
 pen.hideturtle()
-pen.goto(0, 260)
+pen.goto(0, 250)
 pen.clear()
 pen.write(f"Score : 0  High Score : {highscore}", align="center",
           font=("helvetica", 20, "bold"))
@@ -61,10 +69,10 @@ def stop():
 def move():
     if head.direction == "right":
         x = head.xcor()
-        head.setx(x-5)
+        head.setx(x-3)
     if head.direction == "left":
         x = head.xcor()
-        head.setx(x+5)
+        head.setx(x+3)
 wn.listen()
 wn.onkeypress(goright, "Right")
 wn.onkeypress(goleft, "Left")
@@ -78,6 +86,8 @@ while True:
         highscoredoc.write(str(highscore))
     ypos = ypos-fallspeed*2
     faller.goto(xpos, ypos)
+    ypos2 = ypos2-fallspeed*2
+    faller2.goto(xpos2, ypos2)
     move()
     if head.distance(faller) < 20:
         score -= 1
@@ -92,7 +102,13 @@ while True:
         xpos = random.randint(-280, 280)
         ypos = 290
         faller.goto(xpos, ypos)
-        fallspeed += 0.05
+        fallspeed += 0.005
+    if ypos2 < -280 and head.distance(faller2) > 20:
+        score += 1
+        xpos2 = random.randint(-280, 280)
+        ypos2 = 290
+        faller2.goto(xpos, ypos)
+        fallspeed += 0.005
         
     if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
         head.goto(0, -280)
