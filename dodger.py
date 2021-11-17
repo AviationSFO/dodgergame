@@ -43,6 +43,15 @@ xpos2 = random.randint(-280, 280)
 global ypos2
 ypos2 = 290
 faller2.goto(xpos2, ypos2)
+faller3 = turtle.Turtle()
+faller3.speed(0)
+faller3.shape("square")
+faller3.color("green")
+faller3.penup()
+xpos3 = random.randint(-280, 280)
+global ypos3
+ypos3 = 290
+faller3.goto(xpos2, ypos2)
 fallspeed = 1.5
 
 # pen setup
@@ -88,6 +97,8 @@ while True:
     faller.goto(xpos, ypos)
     ypos2 = ypos2-fallspeed*2
     faller2.goto(xpos2, ypos2)
+    ypos3 = ypos3-fallspeed*2
+    faller3.goto(xpos3, ypos3)
     move()
     if head.distance(faller) < 20:
         score -= 1
