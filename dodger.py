@@ -12,7 +12,7 @@ highscoredoc = open(os.path.expanduser("~/Desktop/DodgerGame/highest_score_local
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game Beta 0.1r4")
+wn.title("Dodger Game Beta 0.1r6")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -119,6 +119,12 @@ while True:
         xpos2 = random.randint(-280, 280)
         ypos2 = 290
         faller2.goto(xpos, ypos)
+        fallspeed += 0.005
+    if ypos3 < -280 and head.distance(faller3) > 20:
+        score += 1
+        xpos3 = random.randint(-280, 280)
+        ypos3 = 290
+        faller3.goto(xpos, ypos)
         fallspeed += 0.005
         
     if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
