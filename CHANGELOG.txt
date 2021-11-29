@@ -12,3 +12,5 @@ third faller and minor improvments
 
 v0.1r6
 Bug fix - third faller not working after round 1
+
+v0.2 merged pull request with zsakowitz, fixed code
