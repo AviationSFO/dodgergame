@@ -5,10 +5,11 @@ import os
 import time
 import random
 TK_SILENCE_DEPRECATION=1
-fallers = 1
+# fallers = 1
 delay = 0.00625
 score = 0
-highscoredoc = open(os.path.expanduser("~/Desktop/DodgerGame/highest_score_local.txt"), "r+")
+highscoredoc = open(os.path.expanduser(
+    "~/Desktop/DodgerGame/highest_score_local.txt"), "r+")
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
@@ -23,36 +24,33 @@ head.color("white")
 head.penup()
 head.goto(0, -280)
 head.direction = "Stop"
-
-# fallers in the game
-faller = turtle.Turtle()
-faller.speed(0)
-faller.shape("square")
-faller.color("green")
-faller.penup()
-xpos = random.randint(-280, 280)
-global ypos
-ypos = 290
-faller.goto(xpos, ypos)
-faller2 = turtle.Turtle()
-faller2.speed(0)
-faller2.shape("square")
-faller2.color("green")
-faller2.penup()
-xpos2 = random.randint(-280, 280)
-global ypos2
-ypos2 = 290
-faller2.goto(xpos2, ypos2)
-faller3 = turtle.Turtle()
-faller3.speed(0)
-faller3.shape("square")
-faller3.color("green")
-faller3.penup()
-xpos3 = random.randint(-280, 280)
-global ypos3
-ypos3 = 290
-faller3.goto(xpos2, ypos2)
 fallspeed = 1.5
+
+class Faller:
+    def __init__(self):
+        self.faller = turtle.Turtle()
+        self.faller.shape("square")
+        self.faller.color("green")
+        self.faller.penup()
+        self.randomize_location().move_down()
+
+    def goto(self):
+        self.faller.goto(self.xpos, self.ypos)
+        return self
+
+    def move_down(self):
+        self.ypos -= 2 * fallspeed
+        self.faller.goto(self.xpos, self.ypos)
+        return self
+
+    def randomize_location(self):
+        self.xpos = random.randint(-280, 280)
+        self.ypos = 290
+        return self
+# fallers in the game
+faller1 = Faller()
+faller2 = Faller()
+faller3 = Faller()
 
 # pen setup
 pen = turtle.Turtle()
@@ -93,40 +91,41 @@ while True:
         highscore = score
         highscoredoc.seek(0)
         highscoredoc.write(str(highscore))
-    ypos = ypos-fallspeed*2
-    faller.goto(xpos, ypos)
-    ypos2 = ypos2-fallspeed*2
-    faller2.goto(xpos2, ypos2)
-    ypos3 = ypos3-fallspeed*2
-    faller3.goto(xpos3, ypos3)
+    faller1.move_down()
+    faller2.move_down()
+    faller3.move_down()
     move()
-    if head.distance(faller) < 20:
+    if head.distance(faller1.faller) < 20:
         score -= 1
         pen.clear()
-        pen.write("Score : {} High Score : {} ".format(
-                score, highscore), align="center", font=("helvetica", 20, "bold"))
-        xpos = random.randint(-280, 280)
-        ypos = 290
-        faller.goto(xpos, ypos)
-    if ypos < -280 and head.distance(faller) > 20:
+        pen.write(f"Score : {score} High Score : {highscore} ",
+            align="center", font=("helvetica", 20, "bold"))
+        faller1.randomize_location()
+    if head.distance(faller2.faller) < 20:
+        score -= 1
+        pen.clear()
+        pen.write(f"Score : {score} High Score : {highscore} ",
+            align="center", font=("helvetica", 20, "bold"))
+        faller1.randomize_location()
+    if head.distance(faller3.faller) < 20:
+        score -= 1
+        pen.clear()
+        pen.write(f"Score : {score} High Score : {highscore} ",
+            align="center", font=("helvetica", 20, "bold"))
+        faller1.randomize_location()
+    if faller1.ypos < -280 and head.distance(faller1.faller) > 20:
         score += 1
-        xpos = random.randint(-280, 280)
-        ypos = 290
-        faller.goto(xpos, ypos)
+        faller1.randomize_location()
         fallspeed += 0.005
-    if ypos2 < -280 and head.distance(faller2) > 20:
+    if faller2.ypos < -280 and head.distance(faller2.faller) > 20:
         score += 1
-        xpos2 = random.randint(-280, 280)
-        ypos2 = 290
-        faller2.goto(xpos, ypos)
+        faller2.randomize_location()
         fallspeed += 0.005
-    if ypos3 < -280 and head.distance(faller3) > 20:
+    if faller3.ypos < -280 and head.distance(faller3.faller) > 20:
         score += 1
-        xpos3 = random.randint(-280, 280)
-        ypos3 = 290
-        faller3.goto(xpos, ypos)
+        faller3.randomize_location()
         fallspeed += 0.005
-        
+
     if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
         head.goto(0, -280)
         head.direction = "Stop"
@@ -136,7 +135,7 @@ while True:
         pen.write("GAME OVER!\nrestart game", align="center", font=("helvetica", 20, "bold"))
         fallspeed = 0
     else:
-        pen.write("Score : {} High Score : {} ".format(
-                score, highscore), align="center", font=("helvetica", 20, "bold"))
+        pen.write(f"Score : {score} High Score : {highscore} ",
+            align="center", font=("helvetica", 20, "bold"))
     time.sleep(delay)
 wn.mainloop()
