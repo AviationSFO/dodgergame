@@ -8,12 +8,13 @@ TK_SILENCE_DEPRECATION=1
 # fallers = 1
 delay = 0.00625
 score = 0
+score_this_round = 0
 highscoredoc = open(os.path.expanduser(
     "~/Desktop/DodgerGame/highest_score_local.txt"), "r+")
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game Beta 0.1r6")
+wn.title("Dodger Game Beta 0.3")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -25,7 +26,7 @@ head.penup()
 head.goto(0, -280)
 head.direction = "Stop"
 fallspeed = 1.5
-
+# main faller class
 class Faller:
     def __init__(self):
         self.faller = turtle.Turtle()
@@ -96,40 +97,42 @@ while True:
     faller3.move_down()
     move()
     if head.distance(faller1.faller) < 20:
-        score -= 1
+        score_this_round -= 1
         pen.clear()
         pen.write(f"Score : {score} High Score : {highscore} ",
             align="center", font=("helvetica", 20, "bold"))
         faller1.randomize_location()
     if head.distance(faller2.faller) < 20:
-        score -= 1
+        score_this_round -= 1
         pen.clear()
         pen.write(f"Score : {score} High Score : {highscore} ",
             align="center", font=("helvetica", 20, "bold"))
         faller1.randomize_location()
     if head.distance(faller3.faller) < 20:
-        score -= 1
+        score_this_round -= 1
         pen.clear()
         pen.write(f"Score : {score} High Score : {highscore} ",
             align="center", font=("helvetica", 20, "bold"))
         faller1.randomize_location()
     if faller1.ypos < -280 and head.distance(faller1.faller) > 20:
-        score += 1
+        score_this_round += 1
         faller1.randomize_location()
         fallspeed += 0.005
     if faller2.ypos < -280 and head.distance(faller2.faller) > 20:
-        score += 1
+        score_this_round += 1
         faller2.randomize_location()
         fallspeed += 0.005
     if faller3.ypos < -280 and head.distance(faller3.faller) > 20:
-        score += 1
+        score_this_round += 1
         faller3.randomize_location()
         fallspeed += 0.005
 
     if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
         head.goto(0, -280)
         head.direction = "Stop"
-    pen.clear()
+    if score_this_round == 3 or score_this_round > 3:
+        score += 1
+        score_this_round = 0
     if int(score) < 0:
         pen.goto(0, 100)
         pen.write("GAME OVER!\nrestart game", align="center", font=("helvetica", 20, "bold"))
@@ -137,5 +140,8 @@ while True:
     else:
         pen.write(f"Score : {score} High Score : {highscore} ",
             align="center", font=("helvetica", 20, "bold"))
+    pen.clear()
+    pen.write(f"Score : {score} High Score : {highscore} ",
+        align="center", font=("helvetica", 20, "bold"))
     time.sleep(delay)
 wn.mainloop()
