@@ -14,7 +14,7 @@ highscoredoc = open(os.path.expanduser(
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game Beta 0.3")
+wn.title("Dodger Game Beta 0.3r2")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -66,7 +66,7 @@ pen.clear()
 pen.write(f"Score : 0  High Score : {highscore}", align="center",
           font=("helvetica", 20, "bold"))
 
-# assigning keys
+# assigning keystrokes
 def goleft():
     head.direction = "right"
 def goright():
