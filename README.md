@@ -4,3 +4,6 @@ If you get hit you lose!
 
 # Instructions
 Arrow keys to move left and right
+
+# IMPORTANT FOR USE
+Make sure your source folder is called "DodgerGame" on your desktop or this will not work!
