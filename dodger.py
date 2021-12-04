@@ -14,7 +14,7 @@ highscoredoc = open(os.path.expanduser(
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game Beta 0.3r2")
+wn.title("Dodger Game BETA v0.4")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -52,6 +52,7 @@ class Faller:
 faller1 = Faller()
 faller2 = Faller()
 faller3 = Faller()
+faller4 = Faller()
 
 # pen setup
 pen = turtle.Turtle()
@@ -95,6 +96,7 @@ while True:
     faller1.move_down()
     faller2.move_down()
     faller3.move_down()
+    faller4.move_down()
     move()
     if head.distance(faller1.faller) < 20:
         score_this_round -= 1
@@ -113,6 +115,11 @@ while True:
         pen.clear()
         pen.write(f"Score : {score} High Score : {highscore} ",
             align="center", font=("helvetica", 20, "bold"))
+    if head.distance(faller4.faller) < 20:
+        score_this_round -= 1
+        pen.clear()
+        pen.write(f"Score : {score} High Score : {highscore} ",
+            align="center", font=("helvetica", 20, "bold"))
         faller1.randomize_location()
     if faller1.ypos < -280 and head.distance(faller1.faller) > 20:
         score_this_round += 1
@@ -126,17 +133,23 @@ while True:
         score_this_round += 1
         faller3.randomize_location()
         fallspeed += 0.005
+    if faller4.ypos < -280 and head.distance(faller4.faller) > 20:
+        score_this_round += 1
+        faller4.randomize_location()
+        fallspeed += 0.005
 
     if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
         head.goto(0, -280)
         head.direction = "Stop"
-    if score_this_round == 3 or score_this_round > 3:
+    if score_this_round == 4 or score_this_round > 4:
         score += 1
         score_this_round = 0
     if int(score) < 0:
         pen.goto(0, 100)
         pen.write("GAME OVER!\nrestart game", align="center", font=("helvetica", 20, "bold"))
         fallspeed = 0
+        time.sleep(3)
+        break
     else:
         pen.write(f"Score : {score} High Score : {highscore} ",
             align="center", font=("helvetica", 20, "bold"))
