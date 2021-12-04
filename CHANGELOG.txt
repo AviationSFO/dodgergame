@@ -21,3 +21,8 @@ minor changes to code
 
 v0.3r2
 Fixed typo in readme, added comment
+
+v0.4
+added fourth faller
+Next feature in line:
+spacing enforced of fallers
