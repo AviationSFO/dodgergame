@@ -1,1 +1,1 @@
-Version BETA v0.5r2
+Version BETA v0.5.1

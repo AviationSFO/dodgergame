@@ -1,3 +1,4 @@
+BETAS
 v0.1B
 First release!
 
@@ -32,3 +33,8 @@ Added fifth faller, small changes
 This will be one of the final releases before final beta release. Almost 1.0!
 
 v0.5r2 fix score doc
+
+V0.5.1
+Added install script
+STABLES
+v1.0
