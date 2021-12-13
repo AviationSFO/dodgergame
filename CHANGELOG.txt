@@ -26,3 +26,7 @@ v0.4
 added fourth faller
 Next feature in line:
 spacing enforced of fallers
+
+v0.5
+Added fifth faller, small changes
+This will be one of the final releases before final beta release. Almost 1.0!

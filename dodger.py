@@ -1,4 +1,4 @@
-# Falling dodger Game in Python By Steven Weinstein on 11-10-2021
+# Falling dodger Game in Python By Steven Weinstein on 12-13-2021
 # importing required modules
 import turtle
 import os
@@ -14,7 +14,7 @@ highscoredoc = open(os.path.expanduser(
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game BETA v0.4")
+wn.title("Dodger Game BETA v0.5")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -46,13 +46,14 @@ class Faller:
 
     def randomize_location(self):
         self.xpos = random.randint(-280, 280)
-        self.ypos = 290
+        self.ypos = 290        
         return self
 # fallers in the game
 faller1 = Faller()
 faller2 = Faller()
 faller3 = Faller()
 faller4 = Faller()
+faller5 = Faller()
 
 # pen setup
 pen = turtle.Turtle()
@@ -97,6 +98,7 @@ while True:
     faller2.move_down()
     faller3.move_down()
     faller4.move_down()
+    faller5.move_down()
     move()
     if head.distance(faller1.faller) < 20:
         score_this_round -= 1
@@ -137,11 +139,15 @@ while True:
         score_this_round += 1
         faller4.randomize_location()
         fallspeed += 0.005
+    if faller5.ypos < -280 and head.distance(faller5.faller) > 20:
+        score_this_round += 1
+        faller5.randomize_location()
+        fallspeed += 0.005
 
     if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
         head.goto(0, -280)
         head.direction = "Stop"
-    if score_this_round == 4 or score_this_round > 4:
+    if score_this_round == 5 or score_this_round > 5:
         score += 1
         score_this_round = 0
     if int(score) < 0:
