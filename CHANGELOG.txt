@@ -30,3 +30,5 @@ spacing enforced of fallers
 v0.5
 Added fifth faller, small changes
 This will be one of the final releases before final beta release. Almost 1.0!
+
+v0.5r2 fix score doc

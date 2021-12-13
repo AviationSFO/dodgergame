@@ -14,7 +14,7 @@ highscoredoc = open(os.path.expanduser(
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game BETA v0.5")
+wn.title("Dodger Game BETA v0.5r2")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
