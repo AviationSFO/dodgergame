@@ -36,5 +36,8 @@ v0.5r2 fix score doc
 
 V0.5.1
 Added install script
+
 STABLES
+
 v1.0
+Changed fall speed increasing, optimizations, STABLE RELEASE!

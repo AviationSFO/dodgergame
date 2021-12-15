@@ -1,6 +1,6 @@
 # Dodger Game
 Move around to avoide getting hit by falling objects
-If you get hit you lose!
+If you get hit you lose that round!
 
 # Instructions
 Arrow keys to move left and right

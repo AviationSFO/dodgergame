@@ -14,7 +14,7 @@ highscoredoc = open(os.path.expanduser(
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game BETA v0.5.1")
+wn.title("Dodger Game v1.0")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -150,6 +150,7 @@ while True:
     if score_this_round == 5 or score_this_round > 5:
         score += 1
         score_this_round = 0
+        fallspeed += 0.075
     if int(score) < 0:
         pen.goto(0, 100)
         pen.write("GAME OVER!\nrestart game", align="center", font=("helvetica", 20, "bold"))
