@@ -5,7 +5,6 @@ import os
 import time
 import random
 TK_SILENCE_DEPRECATION=1
-# fallers = 1
 delay = 0.00625
 score = 0
 score_this_round = 0
@@ -14,7 +13,7 @@ highscoredoc = open(os.path.expanduser(
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game v1.0")
+wn.title("Dodger Game v1.1")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -45,7 +44,7 @@ class Faller:
         return self
 
     def randomize_location(self):
-        self.xpos = random.randint(-280, 280)
+        self.xpos = random.randrange(-280, 280, 30)
         self.ypos = 290        
         return self
 # fallers in the game
@@ -83,10 +82,25 @@ def move():
     if head.direction == "left":
         x = head.xcor()
         head.setx(x+3)
+
+def DEVTOOLRESET():
+    head.direction = "Stop"
+    head.goto(0,-280)
+    score = 0
+    fallspeed = 0
+    score_this_round = 0
+    time.sleep(2)
+    fallspeed = 1.5
 wn.listen()
 wn.onkeypress(goright, "Right")
 wn.onkeypress(goleft, "Left")
+wn.onkeypress(goright, "d")
+wn.onkeypress(goleft, "a")
+wn.onkeypress(goright, "D")
+wn.onkeypress(goleft, "A")
 wn.onkeypress(stop, " ")
+wn.onkeypress(DEVTOOLRESET, "r")
+wn.onkeypress(DEVTOOLRESET, "R")
 # main loop
 while True:
     wn.update()
@@ -150,7 +164,6 @@ while True:
     if score_this_round == 5 or score_this_round > 5:
         score += 1
         score_this_round = 0
-        fallspeed += 0.075
     if int(score) < 0:
         pen.goto(0, 100)
         pen.write("GAME OVER!\nrestart game", align="center", font=("helvetica", 20, "bold"))
