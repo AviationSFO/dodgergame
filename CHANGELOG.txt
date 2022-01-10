@@ -44,3 +44,6 @@ Changed fall speed increasing, optimizations, STABLE RELEASE!
 
 v1.1
 Code clean up, dev tools on "r" and A + D moving support
+
+v1.2
+Optimize for slower computers

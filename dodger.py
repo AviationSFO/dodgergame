@@ -5,7 +5,7 @@ import os
 import time
 import random
 TK_SILENCE_DEPRECATION=1
-delay = 0.00625
+delay = 0.025
 score = 0
 score_this_round = 0
 highscoredoc = open(os.path.expanduser(
@@ -13,7 +13,7 @@ highscoredoc = open(os.path.expanduser(
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game v1.1")
+wn.title("Dodger Game v1.2")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -24,7 +24,7 @@ head.color("white")
 head.penup()
 head.goto(0, -280)
 head.direction = "Stop"
-fallspeed = 1.5
+fallspeed = 3
 # main faller class
 class Faller:
     def __init__(self):
@@ -78,10 +78,10 @@ def stop():
 def move():
     if head.direction == "right":
         x = head.xcor()
-        head.setx(x-3)
+        head.setx(x-6)
     if head.direction == "left":
         x = head.xcor()
-        head.setx(x+3)
+        head.setx(x+6)
 
 def DEVTOOLRESET():
     head.direction = "Stop"
@@ -90,7 +90,7 @@ def DEVTOOLRESET():
     fallspeed = 0
     score_this_round = 0
     time.sleep(2)
-    fallspeed = 1.5
+    fallspeed = 3
 wn.listen()
 wn.onkeypress(goright, "Right")
 wn.onkeypress(goleft, "Left")
