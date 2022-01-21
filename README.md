@@ -3,7 +3,7 @@ Move around to avoide getting hit by falling objects
 If you get hit you lose that round!
 
 # Instructions
-Arrow keys to move left and right
+Arrow keys to move left and right. Press 0 to activate data recording.
 
 # IMPORTANT FOR USE
 Make sure your source folder is called "DodgerGame" on your desktop if on MAC OS or this will not work!

@@ -1,19 +1,24 @@
-# Falling dodger Game in Python By Steven Weinstein on 12-13-2021
+# Falling dodger Game in Python By Steven Weinstein on 1-20-2022
 # importing required modules
 import turtle
 import os
 import time
 import random
+import threading as thr
 TK_SILENCE_DEPRECATION=1
 delay = 0.025
 score = 0
+APIon = False
 score_this_round = 0
+APIdata = [None, None, None, None, None, None]
 highscoredoc = open(os.path.expanduser(
     "~/Desktop/DodgerGame/highest_score_local.txt"), "r+")
+datadoc = open(os.path.expanduser(
+    "~/Desktop/DodgerGame/data.txt"), "a")
 highscore = highscoredoc.read()
 # Creating a window screen
 wn = turtle.Screen()
-wn.title("Dodger Game v1.2")
+wn.title("Dodger Game v1.3")
 wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0)
@@ -91,6 +96,28 @@ def DEVTOOLRESET():
     score_this_round = 0
     time.sleep(2)
     fallspeed = 3
+
+
+def APIactivate():
+    global APIon
+    APIon = True
+
+
+def APIproc():
+    dist1 = head.distance(faller1.faller)
+    dist2 = head.distance(faller2.faller)
+    dist3 = head.distance(faller3.faller)
+    dist4 = head.distance(faller4.faller)
+    dist5 = head.distance(faller5.faller)
+    APIdata[0] = dist1
+    APIdata[1] = dist2
+    APIdata[2] = dist3
+    APIdata[3] = dist4
+    APIdata[4] = dist5
+    APIdata[5] = (int(APIdata[0]) + int(APIdata[1]) + int(APIdata[2]) + int(APIdata[3]) + int(APIdata[4]))/5
+    datadoc.write(
+        f"({round(APIdata[0], 2)}),({round(APIdata[1], 2)}),({round(APIdata[2], 2)}),({round(APIdata[3], 2)}),({round(APIdata[4], 2)}),({round(APIdata[5], 3)}),\n")
+
 wn.listen()
 wn.onkeypress(goright, "Right")
 wn.onkeypress(goleft, "Left")
@@ -101,6 +128,44 @@ wn.onkeypress(goleft, "A")
 wn.onkeypress(stop, " ")
 wn.onkeypress(DEVTOOLRESET, "r")
 wn.onkeypress(DEVTOOLRESET, "R")
+wn.onkeypress(APIactivate, "0")
+
+
+def checkdist(score_this_round):
+    score_this_round = int(score_this_round)
+    if head.distance(faller1.faller) < 20:
+        score_this_round -= 1
+        # pen.clear()
+        # pen.write(f"Score : {score} High Score : {highscore} ",
+        #     align="center", font=("helvetica", 20, "bold"))
+        faller1.randomize_location()
+    if head.distance(faller2.faller) < 20:
+        score_this_round -= 1
+        # pen.clear()
+        # pen.write(f"Score : {score} High Score : {highscore} ",
+        #     align="center", font=("helvetica", 20, "bold"))
+        faller2.randomize_location()
+    if head.distance(faller3.faller) < 20:
+        score_this_round -= 1
+        # pen.clear()
+        # pen.write(f"Score : {score} High Score : {highscore} ",
+        #     align="center", font=("helvetica", 20, "bold"))
+        faller3.randomize_location()
+    if head.distance(faller4.faller) < 20:
+        score_this_round -= 1
+        # pen.clear()
+        # pen.write(f"Score : {score} High Score : {highscore} ",
+        #     align="center", font=("helvetica", 20, "bold"))
+        faller4.randomize_location()
+    if head.distance(faller5.faller) < 20:
+        score_this_round -= 1
+        # pen.clear()
+        # pen.write(f"Score : {score} High Score : {highscore} ",
+        #     align="center", font=("helvetica", 20, "bold"))
+        faller5.randomize_location()
+
+
+
 # main loop
 while True:
     wn.update()
@@ -114,29 +179,35 @@ while True:
     faller4.move_down()
     faller5.move_down()
     move()
-    if head.distance(faller1.faller) < 20:
-        score_this_round -= 1
-        pen.clear()
-        pen.write(f"Score : {score} High Score : {highscore} ",
-            align="center", font=("helvetica", 20, "bold"))
-        faller1.randomize_location()
-    if head.distance(faller2.faller) < 20:
-        score_this_round -= 1
-        pen.clear()
-        pen.write(f"Score : {score} High Score : {highscore} ",
-            align="center", font=("helvetica", 20, "bold"))
-        faller1.randomize_location()
-    if head.distance(faller3.faller) < 20:
-        score_this_round -= 1
-        pen.clear()
-        pen.write(f"Score : {score} High Score : {highscore} ",
-            align="center", font=("helvetica", 20, "bold"))
-    if head.distance(faller4.faller) < 20:
-        score_this_round -= 1
-        pen.clear()
-        pen.write(f"Score : {score} High Score : {highscore} ",
-            align="center", font=("helvetica", 20, "bold"))
-        faller1.randomize_location()
+
+    if __name__ == "__main__":
+        # creating thread
+        t1 = thr.Thread(target=checkdist, args=(str(score_this_round)))
+        t1.start()
+
+    # if head.distance(faller1.faller) < 20:
+    #     score_this_round -= 1
+    #     pen.clear()
+    #     pen.write(f"Score : {score} High Score : {highscore} ",
+    #         align="center", font=("helvetica", 20, "bold"))
+    #     faller1.randomize_location()
+    # if head.distance(faller2.faller) < 20:
+    #     score_this_round -= 1
+    #     pen.clear()
+    #     pen.write(f"Score : {score} High Score : {highscore} ",
+    #         align="center", font=("helvetica", 20, "bold"))
+    #     faller1.randomize_location()
+    # if head.distance(faller3.faller) < 20:
+    #     score_this_round -= 1
+    #     pen.clear()
+    #     pen.write(f"Score : {score} High Score : {highscore} ",
+    #         align="center", font=("helvetica", 20, "bold"))
+    # if head.distance(faller4.faller) < 20:
+    #     score_this_round -= 1
+    #     pen.clear()
+    #     pen.write(f"Score : {score} High Score : {highscore} ",
+    #         align="center", font=("helvetica", 20, "bold"))
+    #     faller1.randomize_location()
     if faller1.ypos < -280 and head.distance(faller1.faller) > 20:
         score_this_round += 1
         faller1.randomize_location()
@@ -176,5 +247,12 @@ while True:
     pen.clear()
     pen.write(f"Score : {score} High Score : {highscore} ",
         align="center", font=("helvetica", 20, "bold"))
+    
+    if APIon == True:
+        if __name__ == "__main__":
+            # creating thread
+            t1 = thr.Thread(target=APIproc, args=())
+            t1.start()
+
     time.sleep(delay)
 wn.mainloop()

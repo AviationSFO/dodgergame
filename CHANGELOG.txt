@@ -47,3 +47,6 @@ Code clean up, dev tools on "r" and A + D moving support
 
 v1.2
 Optimize for slower computers
+
+v1.3 - Multithreading and data
+implement data recording and multithreading
