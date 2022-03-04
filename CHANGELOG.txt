@@ -50,3 +50,6 @@ Optimize for slower computers
 
 v1.3 - Multithreading and data
 implement data recording and multithreading
+
+
+THIS DOCUMENT IS DEPRECATED AFTER 1.3, MEANING NO RELEASE NOTES WILL BE HERE BUT THEY WILL BE IN THE RELEASE NAME ON GITHUB
