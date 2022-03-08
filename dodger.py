@@ -19,6 +19,9 @@ from pygame.locals import(
     K_p,
     K_r,
     K_m,
+    K_a,
+    K_d,
+    K_s,
     KEYUP,
     QUIT,
     K_0,
@@ -62,7 +65,7 @@ datadoc = open(os.path.expanduser(
 # Setting up game window
 running = True
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Dodger Game v2.0')
+pygame.display.set_caption('Dodger Game v2.0.1')
 screen.fill((0,0,0))
 banner = f"Score : {score}  High Score : {highscore}"
 font = pygame.font.Font(pygame.font.get_default_font(), 36)
@@ -97,11 +100,11 @@ class Player(pygame.sprite.Sprite):
         self.ypos = 576
         self.direction = "stop"
     def update(self, pressed_keys, pause = False):
-        if pressed_keys[K_LEFT]:
+        if pressed_keys[K_LEFT] or pressed_keys[K_a]:
             self.direction = "left"
-        if pressed_keys[K_RIGHT]:
+        if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
             self.direction = "right"
-        if pressed_keys[K_SPACE]:
+        if pressed_keys[K_SPACE] or pressed_keys[K_s]:
             self.direction = "stop"
         if pressed_keys[K_0]:
             APItoggle()
